@@ -1,15 +1,29 @@
 # artistwebplace
 
-## Build Setup
+## Build Setup Guide
+How to setup your enviroment and start the server.
+Command Quick Notes:
+- You must enter the following code while inside your project directory
+- - Read [example 1](https://tutorials.codebar.io/command-line/introduction/tutorial.html)
+- Code Blocks in this README can be keyed as the following ( # = comment, $ = your command )
 
+### Install required code
+Go to your command line and enter the following.
+This will install all required code to your computer.
 ```bash
 # install dependencies
 $ npm install
+```
 
-# start server with at localhost:3000
+### Start server
+How to start the website server on your local computer.
+Enter the following: 
+```bash
+# start server at url: localhost:3000
 $ npm run dev
 ```
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+
+## Understanding your project's folders
 
 ### Content
 Metadata and a richtext field is what type of content this folder contains.
@@ -39,4 +53,7 @@ Your artwork images are nested as such:
 please increment with total amount of images uploading per project
 
 ### Pages
-Yup
+Yup, simple enough
+
+## For More...
+For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
