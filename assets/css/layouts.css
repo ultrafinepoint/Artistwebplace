@@ -16,6 +16,19 @@
 
     padding: 16px;
   }
+
+  .layout-block {
+
+  }
+
+  .layout-block--masonary {
+    columns: 2;
+    gap: 16px;
+  }
+  .layout-block--masonary article {
+    page-break-inside: avoid;
+    margin-bottom: 16px;
+  }
 }
 
 /* Tablet */
@@ -34,6 +47,15 @@
     gap: 24px;
     
     padding: 16px;
+  }
+
+  .layout-block--masonary {
+    columns: 2;
+    gap: 24px;
+  }
+  .layout-block--masonary article {
+    page-break-inside: avoid;
+    margin-bottom: 24px;
   }
 }
 

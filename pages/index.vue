@@ -6,20 +6,21 @@
     <main class="layout-page">
       <section id="main_content" class="layout-section">
         <h1 class="text-big">Artwork</h1>
-        <!-- Image example
-        <img :srcset="require( `~/assets/artwork/${ artwork.slug }/original.jpg` ).srcSet"
-             :alt="artwork.alt"
-             :title="artwork.alt" />
-        -->
+        <ol class="list-labelless layout-block--masonary">
+          <li v-for="artwork in artworks"
+              :key="artwork.id"
+              class="layout-block">
+            <article>
+              <img :srcset="require( `~/assets/artwork/${ artwork.slug }/original.jpg` ).srcSet"
+                :alt="artwork.alt"
+                :title="artwork.alt" />
+              <p>{{ artwork.title }}</p>
+            </article>
+          </li>
+        </ol>
       </section>
       <section id="contents" class="layout-section">
         <h2 class="text-label">Contents</h2>
-          <ol>
-            <li>Artwork 1</li>
-            <li>Artwork 2</li>
-            <li>Artwork 3</li>
-            <li>Artwork 4</li>
-          </ol>
       </section>
     </main>
   </div>
@@ -29,13 +30,34 @@
 
 <script>
 export default {
-  name: 'IndexPage'
+  name: 'IndexPage',
+  async asyncData({ $content, params, error }) {
+    try{
+      
+      const artworks = await $content( "artwork" )
+        .where({ published: true })
+        .fetch()
+
+      console.log( artworks );
+
+      return { artworks }
+    } catch ( err ) {
+      error({
+        statusCode: 404,
+        message: "Page could not be found"
+      })
+    }
+  }
 }
 </script>
 
 
 
 <style scoped>
+img {
+  max-width: 100%;
+}
+
 #main_content {
   grid-area: main;
 }
