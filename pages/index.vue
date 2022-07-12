@@ -11,10 +11,9 @@
               :key="artwork.id"
               class="layout-block">
             <article>
-              <img :srcset="require( `~/assets/artwork/${ artwork.slug }/original.jpg` ).srcSet"
-                :alt="artwork.alt"
-                :title="artwork.alt" />
-              <p>{{ artwork.title }}</p>
+              <ImageArtwork :artwork="artwork"
+                            @selectedArtwork="openLightbox( artwork )"/>
+              <p @click="openLightbox( artwork )">{{ artwork.title }}</p>
             </article>
           </li>
         </ol>
@@ -23,6 +22,12 @@
         <h2 class="text-label">Contents</h2>
       </section>
     </main>
+    <footer>
+      <LightboxArtwork :selectedArtwork="selectedArtwork"
+                       v-if="lightboxOpen"
+                       @lightboxClose="closeLightbox" />
+      <!-- <LightboxArtwork :selectedArtwork="selectedArtwork" v-if="lightboxOpen"/> -->
+    </footer>
   </div>
 </template>
 
@@ -31,6 +36,12 @@
 <script>
 export default {
   name: 'IndexPage',
+  data: () => {
+    return {
+      lightboxOpen: false,
+      selectedArtwork: {}
+    }
+  },
   async asyncData({ $content, params, error }) {
     try{
       
@@ -46,6 +57,23 @@ export default {
         statusCode: 404,
         message: "Page could not be found"
       })
+    }
+  },
+  methods: {
+    testing: function( title ) {
+      console.log( title );
+    },
+    openLightbox: function( artwork ) {
+      console.log( artwork );
+      this.lightboxOpen = !this.lightboxOpen;
+      this.selectedArtwork = artwork;
+
+      console.log( this.lightboxOpen );
+    },
+    closeLightbox: function() {
+      console.log( "blash test!!" );
+      this.lightboxOpen = false;
+      console.log( this.lightboxOpen );
     }
   }
 }

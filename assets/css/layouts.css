@@ -76,6 +76,15 @@
     gap: 32px;
     padding: 24px;
   }
+
+  .layout-block--masonary {
+    columns: 3;
+    gap: 32px;
+  }
+  .layout-block--masonary article {
+    page-break-inside: avoid;
+    margin-bottom: 32px;
+  }
 }
 
 /* Desktop */
@@ -94,5 +103,14 @@
 
     gap: 32px;
     padding: 32px;
+  }
+
+  .layout-block--masonary {
+    columns: 4;
+    gap: 32px;
+  }
+  .layout-block--masonary article {
+    page-break-inside: avoid;
+    margin-bottom: 32px;
   }
 }

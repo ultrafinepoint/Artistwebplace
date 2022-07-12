@@ -31,10 +31,15 @@ h5, h6 {
 }
 
 
-/* ELEMENTS */
+/* elements */
 
 body {
   background-color: whitesmoke;
+}
+
+img {
+  max-width: 100%;
+  max-height: 90vh;
 }
 
 hr {
