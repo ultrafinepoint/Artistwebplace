@@ -1,14 +1,18 @@
 <template>
   <div class="lightbox">
-    <div class="lightbox-close" @click="$emit( 'lightboxClose' )">
-      <!-- svg -->
-      <p>close</p>
-    </div>
     <main>
-      <section class="image">
-        <img :srcset="require( `~/assets/artwork/${ selectedArtwork.slug }/original.jpg` ).srcSet"
+      <section class="image-area">
+        <!--
+          <img :srcset="require( `~/assets/artwork/${ selectedArtwork.slug }/original.jpg` ).srcSet"
+               :alt="selectedArtwork.alt"
+               :title="selectedArtwork.alt"
+               id="smart-image"/>
+          </img>
+        -->
+        <img :src="require( `~/assets/artwork/${ selectedArtwork.slug }/original.jpg` )"
              :alt="selectedArtwork.alt"
-             :title="selectedArtwork.alt"/>
+             :title="selectedArtwork.alt"
+             id="smart-image"/>
         </img>
       </section>
       <section class="meta layout-section">
@@ -17,10 +21,16 @@
         <p>Need date formatter</p>
       </section>
     </main>
+    <div class="lightbox-close" @click="$emit( 'lightboxClose' )">
+      <!-- svg -->
+      <p>close</p>
+    </div>
   </div>
 </template>
 
 <script>
+import Panzoom from '@panzoom/panzoom';
+
 export default {
   props: [ 'selectedArtwork' ],
   data: () => {
@@ -32,6 +42,27 @@ export default {
     exampleMethod: function() {
       console.log( "this is an example" );
     },
+  },
+  mounted() {
+    const elem = document.getElementById( 'smart-image' );
+    /*
+    const panzoom = Panzoom( elem, {
+      maxScale: 5
+    });
+    panzoom.pan( 10, 10 );
+    panzoom.zoom( 2, { animate: true })
+    */
+
+    const panzoom = Panzoom(elem, { canvas: true })
+    const parent = elem.parentElement
+    // No function bind needed
+    parent.addEventListener('wheel', panzoom.zoomWithWheel)
+
+    // This demo binds to shift + wheel
+    parent.addEventListener('wheel', function(event) {
+      if (!event.shiftKey) return
+      panzoom.zoomWithWheel(event)
+    })
   }
 }
 </script>
@@ -46,6 +77,10 @@ export default {
   top: 0;
   right: 0;
   left: 0;
+}
+
+.image-area {
+  background: whitesmoke;
 }
 
 
